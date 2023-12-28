@@ -9,6 +9,52 @@
     </v-card>
     </v-row>
 </v-container>
+
+  <v-col cols="12">
+    <v-autocomplete
+     v-model="friends"
+      :disabled="isUpdating"
+      :items="people"
+      :chips="true"
+      closable-chips
+      color="blue-grey-lighten-2"
+      item-title="errorCodes"
+      item-value="name"
+      label="Select"
+      return-object
+      :multiple="true"
+    >
+      <template v-slot:chip="{ props, item }">
+        <v-chip
+          v-bind="props"
+          :text="item.raw.name"
+        ></v-chip>
+      </template>
+
+      <template v-slot:item="{ props, item }">
+        <v-list-item
+          v-bind="props"
+          :title="item?.raw?.errorCodes"
+        ></v-list-item>
+      </template>
+    </v-autocomplete>
+    <v-col cols="12">
+        <v-combobox
+                v-model="select"
+
+                :chips="true"
+                closable-chips
+                color="blue-grey-lighten-2"
+                item-title="errorCodes"
+                item-value="name"
+                label="Select"
+                return-object
+                :multiple="true"
+                @change="getUpdatedValue"
+        ></v-combobox>
+    </v-col>
+    <v-btn @click="consoleloge">asd</v-btn>
+  </v-col>
 </template>
 <script>
 import Chart from "chart.js/auto"
@@ -42,7 +88,7 @@ mounted(){
             borderWidth: 1,
 
 
-        
+
         }]
     },
     options: {
@@ -51,7 +97,7 @@ mounted(){
         legend: {
           position: 'right',
           }
-        
+
         }
     }
 }),
@@ -81,7 +127,7 @@ mounted(){
             borderWidth: 1,
 
 
-        
+
         }]
     },
     options: {
@@ -95,11 +141,97 @@ mounted(){
           labels:{
           }
           }
-        
+
         }
     }
 });
-}
+},
+data() {
+  return {
+      autoUpdate: true,
+    select: [
+      {
+        errorCodes: 'asdasdasd1',
+        asdasd: '',
+        asdasd2: ''
+      },
+      {
+        errorCodes: 'asdasdasd8',
+        asdasd: '',
+        asdasd2: ''
+      }
+    ],
+      friends: [
+        {
+          errorCodes: 'asdasdasd1',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd8',
+          asdasd: ''
+        }
+      ],
+      isUpdating: false,
+      name: 'Midnight Crew',
+      people: [
+        // TODO: https://github.com/vuetifyjs/vuetify/issues/15721
+        // { header: 'Group 1' },
+        {
+          errorCodes: 'asdasdasd1',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd2',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd3',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd4',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd5',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd6',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd7',
+          asdasd: ''
+        },
+        {
+          errorCodes: 'asdasdasd8',
+          asdasd: ''
+        }
+      ],
+      title: 'The summer breeze',
+      timeout: null,
+    }
+},
+  methods: {
+      getUpdatedValue() {
+          this.select.map(item => {
+                  const newObj = {
+                      errorCodes: item,
+                      asdasd: '',
+                      asdasd2: ''
+                  };
+                  item = newObj
+                  this.select.push(newObj);
+              return item;
+          })
+          console.log(this.select);
+      },
+    consoleloge() {
+      console.log(this.select)
+    }
+  //
+  }
 }
 
 </script>

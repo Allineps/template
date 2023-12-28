@@ -1,17 +1,17 @@
 <template>
     <v-app>
-      <v-navigation-drawer v-model="drawer">
+      <v-navigation-drawer v-model="drawer"  :class="this.menu != null ? classess(String) : 'bg-pink'">
         <!-- -->
     <v-list v-for="item in menu">
       <v-list-item v-if="typeof item.subs == 'undefined' && item.subs == null "
-       prepend-icon="" 
-       :title="item.name" 
+       prepend-icon=""
+       :title="item.name"
        :value="item.name" >
       </v-list-item>
-      <v-list-group>   
+      <v-list-group>
         <template v-slot:activator="{ props }">
           <v-list-item v-if="typeof item.subs !== 'undefined' && item.subs !== null"
-            v-bind="props" 
+            v-bind="props"
             prepend-icon=""
             :title="item.name"
           ></v-list-item>
@@ -19,17 +19,17 @@
         <!-- second level -->
         <v-list v-for="sub in item.subs">
         <v-list-item v-if="typeof sub.subs == 'undefined' && sub.subs == null "
-       :title="sub.name" 
+       :title="sub.name"
        :value="sub.name" >
       </v-list-item>
-        <v-list-group v-if="typeof sub.subs !== 'undefined' && sub.subs !== null" > 
+        <v-list-group v-if="typeof sub.subs !== 'undefined' && sub.subs !== null" >
           <template v-slot:activator="{ props }">
             <v-list-item
               v-bind="props"
               :title="sub.name"
             ></v-list-item>
           </template>
-        
+
         <!-- third level -->
           <v-list-item
             v-for="sub1 in sub.subs"
@@ -42,25 +42,25 @@
 
     </v-list>
       </v-navigation-drawer>
-    
+
 
       <v-app-bar>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-  
+
         <v-app-bar-title>Application</v-app-bar-title>
       </v-app-bar>
-  
+
       <v-main>
         <Home/>
         <!--  -->
       </v-main>
     </v-app>
   </template>
-  
+
   <script setup>
  const drawer = ref(null)
   </script>
-  
+
   <script>
  import { ref } from 'vue';
  import { mapState } from 'vuex'
@@ -71,14 +71,30 @@
         components:{
             Home
          },
-      data: () => ({ 
-        drawer: null,
-}),
-computed: {
+          data() {
+          return{
+              drawer: null,
+              status: '300',
+          }
+          } ,
+        computed: {
             // Get 'menu' from store.
             ...mapState([
                 'menu'
             ])
-    }
+        },
+        methods: {
+
+        classess() {
+          if (this.status == '200') {
+            return 'bg-amber';
+          }
+          if (this.status == '300') {
+            return "bg-deep-orange";
+          } else {
+            return "bg-red-lighten-3";
+          }
+        }
+      },
 }
   </script>
