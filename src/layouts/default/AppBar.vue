@@ -1,8 +1,8 @@
 <template>
     <v-app>
-      <v-navigation-drawer v-model="drawer"  :class="menu1 != null ? classess(String) : 'bg-pink'">
+      <v-navigation-drawer v-model="drawer"  :class="menu != null ? classess(String) : 'bg-pink'">
         <!-- -->
-    <v-list v-for="item in this.menu1">
+    <v-list v-for="item in menu">
       <v-list-item v-if="typeof item.subs == 'undefined' && item.subs == null "
        prepend-icon=""
        :title="item.name"
@@ -68,7 +68,7 @@
 
     export default {
       beforeMount() {
-        this.menu1 = this.$store.state.menu
+        //
       },
       selected: 0,
         components:{
