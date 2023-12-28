@@ -2,7 +2,7 @@
     <v-app>
       <v-navigation-drawer v-model="drawer"  :class="this.menu != null ? classess(String) : 'bg-pink'">
         <!-- -->
-    <v-list v-for="item in menu">
+    <v-list v-for="item in this.menu">
       <v-list-item v-if="typeof item.subs == 'undefined' && item.subs == null "
        prepend-icon=""
        :title="item.name"
