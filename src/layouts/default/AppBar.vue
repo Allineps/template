@@ -1,5 +1,30 @@
 <template>
-    <v-app>
+  <v-app id="inspire">
+    <v-app-bar :flat="true">
+      <v-container class="align-center">
+        <v-btn
+          text="Alex Kocsis"
+          variant="text"
+          @click="$router.push('/')"
+        ></v-btn>
+        <v-avatar
+          class="me-3"
+          image="src/assets/profilepic.jpg"
+          color="grey-darken-1"
+          size="48"
+        ></v-avatar>
+      </v-container>
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        :text="link"
+        @click="$router.push(link)"
+        variant="text"
+      ></v-btn>
+    </v-app-bar>
+    <v-main>
+      <router-view/>
+    </v-main>
       <v-navigation-drawer v-model="drawer"  :class="menu != null ? classess(String) : 'bg-pink'">
         <!-- -->
     <v-list v-for="item in menu">
@@ -42,18 +67,14 @@
 
     </v-list>
       </v-navigation-drawer>
-
-
       <v-app-bar>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
         <v-app-bar-title>Application</v-app-bar-title>
       </v-app-bar>
-
       <v-main>
         <Home/>
         <!--  -->
-      </v-main>
+      </v-main>0
     </v-app>
   </template>
 
@@ -68,6 +89,7 @@
 
     export default {
       beforeMount() {
+        console.log(this.menu);
         //
       },
       selected: 0,
@@ -76,6 +98,12 @@
          },
           data() {
           return {
+            links: [
+              'About me & CV',
+              'Projekts',
+              'Messages',
+              'logout',
+            ],
             menu1: [],
               drawer: null,
               status: '300',
@@ -88,7 +116,6 @@
             ])
         },
         methods: {
-
         classess() {
           if (this.status == '200') {
             return 'bg-amber';

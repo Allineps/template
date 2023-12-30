@@ -1,11 +1,9 @@
 <script>
 export default {
-name: "LandingPage"
+  name: "LandingPage"
 }
 </script>
-
 <template>
-  $END$
 </template>
 
 <style scoped>
